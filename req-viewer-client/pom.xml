@@ -4,22 +4,22 @@
 
   <parent>
     <groupId>io.github.gabbraga</groupId>
-    <artifactId>perch-search</artifactId>
+    <artifactId>req-viewer</artifactId>
     <version>1.0-SNAPSHOT</version>
   </parent>
 
-  <artifactId>perch-search-client</artifactId>
+  <artifactId>req-viewer-client</artifactId>
   <packaging>gwt-app</packaging>
 
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>perch-search-shared</artifactId>
+      <artifactId>req-viewer-shared</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>perch-search-shared</artifactId>
+      <artifactId>req-viewer-shared</artifactId>
       <version>${project.version}</version>
       <classifier>sources</classifier>
     </dependency>

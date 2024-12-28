@@ -11,10 +11,10 @@ mvn archetype:generate -DarchetypeGroupId=net.ltgt.gwt.archetypes -DarchetypeVer
 
 ### Inicialize o projeto GWT
 ```
-mvn gwt:codeserver -pl perch-search-client -am
+mvn gwt:codeserver -pl req-viewer-client -am
 ```
 
 ### Inicialize o servidor web
 ```
-mvn jetty:run -pl perch-search-server -am -Denv=dev
+mvn jetty:run -pl req-viewer-server -am -Denv=dev
 ```
