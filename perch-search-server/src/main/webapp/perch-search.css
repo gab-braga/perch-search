@@ -4,9 +4,44 @@
 
 body {
     font-family: Arial, sans-serif;
+    width: 100%;
+    min-height: 100vh;
+    margin: 0 !important;
+    padding: 16px !important;
 }
 
 .titleLabel {
     font-size: 2rem !important;
     font-weight: 600 !important;
+}
+
+div.labelForm {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 12px;
+}
+
+div.resultLabel {
+    margin-top: 16px;
+    padding: 16px;
+    border: 1px solid gray;
+    border-radius 10px;
+}
+
+input.inputForm,
+select.inputForm {
+    width: 100%;
+    padding: 8px 16px;
+    font-size: 1rem;
+    margin-bottom: 12px;
+}
+
+button.sendButton {
+    font-size: 1.2rem;
+}
+
+table.panel {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
 }

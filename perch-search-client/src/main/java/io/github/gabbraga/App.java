@@ -15,12 +15,11 @@ public class App implements EntryPoint {
 
 	final Label httpLabel = new Label("Enter the EndPoint");
 	final Label httpMethodLabel = new Label("Enter the Method");
-	final Label resultLabel = new Label();
+	final Label resultLabel = new Label("No results");
 	final TextBox httpField = new TextBox();
 	final ListBox httpMethodField = new ListBox();
+	final Button sendButton = new Button("Send");
 	final VerticalPanel panel = new VerticalPanel();
-	final Button searchButton = new Button("Send");
-	final VerticalPanel resultsPanel = new VerticalPanel();
 
 	final String standardUrlApi = "https://api.github.com/users/gab-braga/repos";
 
@@ -78,16 +77,23 @@ public class App implements EntryPoint {
 		httpMethodField.addItem("PUT");
 		httpMethodField.addItem("DELETE");
 
+		httpLabel.addStyleName("labelForm");
+		httpMethodLabel.addStyleName("labelForm");
+		resultLabel.addStyleName("resultLabel");
+		httpField.addStyleName("inputForm");
+		httpMethodField.addStyleName("inputForm");
+		sendButton.addStyleName("sendButton");
+		panel.addStyleName("panel");
+
 		panel.add(httpLabel);
 		panel.add(httpField);
 		panel.add(httpMethodLabel);
 		panel.add(httpMethodField);
-		panel.add(searchButton);
+		panel.add(sendButton);
 		panel.add(resultLabel);
-		panel.add(resultsPanel);
 
 		RootPanel.get().add(panel);
 
-		searchButton.addClickHandler(new RequestTestHandler());
+		sendButton.addClickHandler(new RequestTestHandler());
 	}
 }
