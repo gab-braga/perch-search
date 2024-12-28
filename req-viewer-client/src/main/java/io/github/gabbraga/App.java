@@ -13,6 +13,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class App implements EntryPoint {
 
+	final Label titleLabel = new Label("Request Viewer");
 	final Label httpLabel = new Label("Enter the EndPoint");
 	final Label httpMethodLabel = new Label("Enter the Method");
 	final Label resultLabel = new Label("No results");
@@ -77,6 +78,7 @@ public class App implements EntryPoint {
 		httpMethodField.addItem("PUT");
 		httpMethodField.addItem("DELETE");
 
+		titleLabel.addStyleName("titleLabel");
 		httpLabel.addStyleName("labelForm");
 		httpMethodLabel.addStyleName("labelForm");
 		resultLabel.addStyleName("resultLabel");
@@ -85,6 +87,7 @@ public class App implements EntryPoint {
 		sendButton.addStyleName("sendButton");
 		panel.addStyleName("panel");
 
+		panel.add(titleLabel);
 		panel.add(httpLabel);
 		panel.add(httpField);
 		panel.add(httpMethodLabel);

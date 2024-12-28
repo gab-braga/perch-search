@@ -10,30 +10,35 @@ body {
     padding: 16px !important;
 }
 
-.titleLabel {
+div.titleLabel {
     font-size: 2rem !important;
     font-weight: 600 !important;
+    margin-bottom: 16px;
 }
 
 div.labelForm {
     font-size: 1.2rem;
     font-weight: 500;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
 }
 
 div.resultLabel {
+    width: 100%;
+    max-width: calc(100vw - 48px);
+    overflow-x: auto;
     margin-top: 16px;
     padding: 16px;
     border: 1px solid gray;
-    border-radius 10px;
 }
 
 input.inputForm,
 select.inputForm {
     width: 100%;
+    min-width: 120px;
     padding: 8px 16px;
     font-size: 1rem;
-    margin-bottom: 12px;
+    margin-bottom: 16px;
+    border: 1px solid gray;
 }
 
 button.sendButton {
