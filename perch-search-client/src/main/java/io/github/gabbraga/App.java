@@ -1,36 +1,93 @@
 package io.github.gabbraga;
 
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.http.client.*;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class App implements EntryPoint {
 
-	private final GreetingServiceAsync greetingService = GWT
-			.create(GreetingService.class);
+	final Label httpLabel = new Label("Enter the EndPoint");
+	final Label httpMethodLabel = new Label("Enter the Method");
+	final Label resultLabel = new Label();
+	final TextBox httpField = new TextBox();
+	final ListBox httpMethodField = new ListBox();
+	final VerticalPanel panel = new VerticalPanel();
+	final Button searchButton = new Button("Send");
+	final VerticalPanel resultsPanel = new VerticalPanel();
+
+	final String standardUrlApi = "https://api.github.com/users/gab-braga/repos";
+
+	private RequestBuilder.Method getRequestMethod(String option) {
+		switch (option) {
+			case "GET":
+				return RequestBuilder.GET;
+			case "POST":
+				return RequestBuilder.POST;
+			case "PUT":
+				return RequestBuilder.PUT;
+			case "DELETE":
+				return RequestBuilder.DELETE;
+		}
+		return null;
+	}
+
+	class RequestTestHandler implements ClickHandler {
+		@Override
+		public void onClick(ClickEvent event) {
+			final String url = httpField.getText();
+			final String method = httpMethodField.getSelectedItemText();
+
+			if(method == null || method.isEmpty()) {
+				httpMethodField.setFocus(true);
+			} else if (url == null || url.isEmpty()) {
+				httpField.setFocus(true);
+			} else {
+				final RequestBuilder.Method requestMethod = getRequestMethod(method);
+				final RequestBuilder builder = new RequestBuilder(requestMethod, url);
+				try {
+					builder.sendRequest(null, new RequestCallback() {
+						@Override
+						public void onResponseReceived(Request request, Response response) {
+							resultLabel.setText(response.getText());
+						}
+
+						@Override
+						public void onError(Request request, Throwable throwable) {
+							System.out.println("ERROR: " + throwable);
+						}
+					});
+				} catch (RequestException e) {
+					throw new RuntimeException(e);
+				}
+			}
+        }
+	}
 
 	public void onModuleLoad() {
-		final Label titleLabel = new Label("Login");
-		final Label emailLabel = new Label("E-mail");
-		final Label passLabel = new Label("Senha");
-		final TextBox emailField = new TextBox();
-		final TextBox passField = new TextBox();
-		final Button sendButton = new Button("Entrar");
-		final VerticalPanel  vertPanel = new VerticalPanel();
+		httpField.setText(standardUrlApi);
 
-		titleLabel.addStyleName("titleLabel");
+		httpMethodField.addItem("GET");
+		httpMethodField.addItem("POST");
+		httpMethodField.addItem("PUT");
+		httpMethodField.addItem("DELETE");
 
-		vertPanel.add(titleLabel);
-		vertPanel.add(emailLabel);
-		vertPanel.add(emailField);
-		vertPanel.add(passLabel);
-		vertPanel.add(passField);
-		vertPanel.add(sendButton);
+		panel.add(httpLabel);
+		panel.add(httpField);
+		panel.add(httpMethodLabel);
+		panel.add(httpMethodField);
+		panel.add(searchButton);
+		panel.add(resultLabel);
+		panel.add(resultsPanel);
 
-		RootPanel.get().add(vertPanel);
+		RootPanel.get().add(panel);
+
+		searchButton.addClickHandler(new RequestTestHandler());
 	}
 }
